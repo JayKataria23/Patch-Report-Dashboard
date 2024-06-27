@@ -22,18 +22,19 @@ if len(df.data) > 0:
         images = list(df.loc[df["branchAndDateTime"]==select, "images"])[0]
         cpuList = list(df.loc[df["branchAndDateTime"]==select, "cpu"])[0]
         monitorList = list(df.loc[df["branchAndDateTime"]==select, "monitor"])[0]
-        id = list(df.loc[df["branchAndDateTime"]==select, "monitor"])[0]
+        id = list(df.loc[df["branchAndDateTime"]==select, "id"])[0]
         if images != None:
             for i in images:
                 data = conn.download("images" ,source_path=i, ttl=None)
                 st.image(data[0])
-            with st.form("Patch"):    
-                cpu = st.text_area("CPU Serial No.'s", placeholder="Seperate with comma", value=cpuList)
-                monitor = st.text_area("Monitor Serial No.'s", placeholder="Seperate with comma", value=monitorList)
-                save = st.form_submit_button("Save Changes", use_container_width=True)
-            if save:
-                execute_query(conn.table('nextgen1').update([{
-                                "cpu":cpu,
-                                "monitor":monitor,
-                        }]).eq("id", id), ttl='0')
-                st.rerun()
+        with st.form("Patch", clear_on_submit=True):    
+            cpu = st.text_area("CPU Serial No.'s", placeholder="Seperate with comma", value=cpuList)
+            monitor = st.text_area("Monitor Serial No.'s", placeholder="Seperate with comma", value=monitorList)
+            save = st.form_submit_button("Save Changes", use_container_width=True)
+        if save:
+            execute_query(conn.table('nextgen1').update([{
+                            "cpu":cpu,
+                            "monitor":monitor,
+                    }]).eq("id", id), ttl='0')
+            st.rerun()
+                
