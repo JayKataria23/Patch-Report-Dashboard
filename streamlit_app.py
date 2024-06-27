@@ -77,7 +77,7 @@ if len(df.data) > 0:
         sender = "imbuzixjay@gmail.com"
         password = "aehl bovs lfaj lybs"
         to = emails
-        content = content + "\n\n"
+        content = content + "\n\nGo to : https://patch-report-dashboard.streamlit.app/"
         msg['From'] = sender
         msg['Subject'] = subject
         msg.set_content(content)
