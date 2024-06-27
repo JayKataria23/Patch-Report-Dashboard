@@ -36,3 +36,4 @@ if len(df.data) > 0:
                                 "cpu":cpu,
                                 "monitor":monitor,
                         }]).eq("id", id), ttl='0')
+                st.rerun()
