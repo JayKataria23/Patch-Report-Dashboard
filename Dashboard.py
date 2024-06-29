@@ -24,8 +24,8 @@ if len(df.data) > 0:
         st.subheader('Patch Report Analysis')
     with status_col[1]:
         st.write(f'No. of reports: `{len(df)}`')
-        st.write(f'No. of patches: `{len(df)}`')
-
+        st.write(f'No. of patches: `{len(",".join(list(df.loc[(df["status"]=="Completed")&(df["cpu"].isna() == False), "cpu"])).split(","))}`')
+    
     date_range = st.date_input("Date Range", value=[datetime.today()-timedelta(days=30), datetime.today()])
 
 
